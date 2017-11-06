@@ -6,6 +6,10 @@
 <div id="app">
     <div id="characterEditor">
         <h1>Character Editor</h1>
-        <button @click="createCharacter">Create New</button>
+        <button @click="createCharacter">New Character</button>
+        <button @click="createRandomCharacter">Random Character</button>
+        <div v-if="loadedCharacter !== undefined">
+            <character :character="loadedCharacter"></character>
+        </div>
     </div>
 </div>

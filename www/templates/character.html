@@ -1,0 +1,40 @@
+<!-- Usage:
+    <character :character="character"></character>
+-->
+
+<template id="characterTemplate">
+    <div>
+        <h2>Character</h2>
+        <span>{{character.gender}}</span>
+        <span>{{name()}}</span>
+    </div>                
+</template>
+
+<script type="text/javascript">
+    requirejs.config({
+        baseUrl: 'js/lib',
+        paths: {
+            app: '../app',
+            models: '../app/models',
+            data: '../../data',
+        }
+    });
+    requirejs([
+            'vue'
+        ],
+
+        function(Vue) {
+            console.log("Registering character template.")
+
+            Vue.component('character', {
+                props: ['character'],
+                template: '#characterTemplate',
+                components: {},
+                methods: {
+                    name: function() {
+                        return this.character.name.first;
+                    }
+                }
+            });
+        });
+</script>
