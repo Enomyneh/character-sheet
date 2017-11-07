@@ -1,10 +1,10 @@
-define(function () {
+define(function() {
 
     console.log("Initialising Character definition");
 
     // This is specificallly a Mage the Awakening Character
     function Character() {
-        this.initialize = function () {
+        this.initialize = function() {
             console.log("Creating Character");
 
         };
@@ -17,7 +17,15 @@ define(function () {
         this.virtue = "";
         this.vice = "";
 
-        this.attributes = {};
+        this.intelligence = 1;
+        this.wits = 1;
+        this.resolve = 1;
+        this.strength = 1;
+        this.dexterity = 1;
+        this.stamina = 1;
+        this.presence = 1;
+        this.manipulation = 1;
+        this.composure = 1;
 
         this.initialize();
     }

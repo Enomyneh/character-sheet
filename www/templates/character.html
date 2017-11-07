@@ -4,10 +4,9 @@
 
 <template id="characterTemplate">
     <div>
-        <h2>Character</h2>
         <div class="form-group">
-            <personal :character="character"></personal>
-            <attributes :attributes="character.attributes"></attributes>
+            <personal v-model="character"></personal>
+            <attributes v-model="character"></attributes>
         </div>
     </div>
 </template>
@@ -22,15 +21,20 @@
         }
     });
     requirejs([
-        'vue'
-    ],
+            'vue'
+        ],
 
-        function (Vue) {
+        function(Vue) {
             console.log("Registering character template.")
 
             Vue.component('character', {
+                model: {
+                    prop: 'character'
+                },
                 props: ['character'],
-                data: function () { return this.character; },
+                data: function() {
+                    return this.character;
+                },
                 template: '#characterTemplate',
                 components: {},
                 methods: {}

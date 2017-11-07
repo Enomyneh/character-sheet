@@ -1,51 +1,23 @@
 <!-- Usage:
-    <personal :character="character"></personal>
+    <personal v-model="character"></personal>
 -->
 
 <template id="personal">
-    <div>
+        <fieldset>
         <legend>Personal</legend>
-        <label for="name" class="col-lg-2 control-label">name</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" id="name" title="name" :value="character.name">
-        </div>
-        <label for="age" class="col-lg-2 control-label">age</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" id="age" title="age" :value="character.age">
-        </div>
-        <label for="player" class="col-lg-2 control-label">player</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" id="player" title="player" :value="character.player">
-        </div>
-        <label for="chronicle" class="col-lg-2 control-label">chronicle</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" id="chronicle" title="chronicle" :value="character.chronicle">
-        </div>
-        <label for="concept" class="col-lg-2 control-label">concept</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" id="concept" title="concept" :value="character.concept">
-        </div>
-        <label for="virtue" class="col-lg-2 control-label">virtue</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" id="virtue" title="virtue" :value="character.virtue">
-        </div>
-        <label for="vice" class="col-lg-2 control-label">vice</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" id="vice" title="vice" :value="character.vice">
-        </div>
-        <label for="path" class="col-lg-2 control-label">path</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" id="path" title="path" :value="character.path">
-        </div>
-        <label for="order" class="col-lg-2 control-label">order</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" id="order" title="order" :value="character.order">
-        </div>
-        <label for="cabal" class="col-lg-2 control-label">cabal</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" id="cabal" title="cabal" :value="character.cabal">
-        </div>
-    </div>
+        
+        <cstextbox :value.sync="character.name" :label="'Name'"></cstextbox>
+        <cstextbox :value.sync="character.age" :label="'Age'"></cstextbox>
+        <cstextbox :value.sync="character.player" :label="'Player'"></cstextbox>
+        <cstextbox :value.sync="character.chronicle" :label="'Chronicle'"></cstextbox>
+        <cstextbox :value.sync="character.concept" :label="'Concept'"></cstextbox>
+        <cstextbox :value.sync="character.virtue" :label="'Virtue'"></cstextbox>
+        <cstextbox :value.sync="character.vice" :label="'Vice'"></cstextbox>
+        <cstextbox :value.sync="character.path" :label="'Path'"></cstextbox>
+        <cstextbox :value.sync="character.order" :label="'Order'"></cstextbox>
+        <cstextbox :value.sync="character.cabal" :label="'Cabal'"></cstextbox>
+
+    </fieldset>
 </template>
 
 <script type="text/javascript">
@@ -58,15 +30,20 @@
         }
     });
     requirejs([
-        'vue'
-    ],
+            'vue'
+        ],
 
-        function (Vue) {
+        function(Vue) {
             console.log("Registering personal template.")
 
             Vue.component('personal', {
+                model: {
+                    prop: 'character'
+                },
                 props: ['character'],
-                data: function () { return this.character; },
+                data: function() {
+                    return this.character;
+                },
                 template: '#personal',
                 components: {},
                 methods: {}

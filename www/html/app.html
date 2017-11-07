@@ -4,15 +4,15 @@
     </script>
 </div>
 <div id="app" style="display:none;">
-    <div id="characterEditor">
-        <h1>Character Editor</h1>
-        <button @click="createCharacter()">New Character</button>
-        <button @click="createRandomCharacter()">Random Character</button>
-        <button @click="saveLocally()">Save to browser</button>
-        <button @click="loadLocally()">Load from browser</button>
-        <div v-if="loadedCharacter !== undefined">
-            <cstextbox v-model="loadedCharacter.name"></cstextbox>
-            <character :character="loadedCharacter"></character>
+
+    <script id="nav">
+        loadWebComponent("nav", "html/");
+    </script>
+    <div class="container">
+        <div class="row marketing">
+            <script id="editor">
+                loadWebComponent("editor", "html/");
+            </script>
         </div>
     </div>
 </div>

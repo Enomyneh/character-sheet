@@ -1,0 +1,70 @@
+<!-- Usage:
+    <csdots :value.sync="__PROPERTY__" :label="'__LABEL__'"></csdots>
+-->
+
+<template id="csdots">
+    <div>
+        <label :for="label" class="col-xs-6 col-sm-2 control-label">
+            {{label}}</label>
+        <div class="col-xs-6 col-sm-2">
+            <input type="number" :min="min" :max="max" class="form-control" :id="label" :value="value" @input="updateValue">
+        </div>
+    </div>
+</template>
+
+<script type="text/javascript">
+    requirejs.config({
+        baseUrl: 'js/lib',
+        paths: {
+            app: '../app',
+            models: '../app/models',
+            data: '../../data',
+        }
+    });
+    requirejs([
+            'vue'
+        ],
+
+        function(Vue) {
+            console.log("Registering csdots template.")
+
+            Vue.component('csdots', {
+                model: {
+                    prop: 'value'
+                },
+                props: {
+                    value: {
+                        type: Number,
+                        required: true
+                    },
+                    min: {
+                        type: Number,
+                        required: true
+                    },
+                    max: {
+                        type: Number,
+                        required: true
+                    },
+                    label: {
+                        type: String,
+                        required: true
+                    }
+                },
+                data: function() {
+                    return {
+                        text: this.value
+                    };
+                },
+                template: '#csdots',
+                components: {},
+                methods: {
+                    updateValue: function(event) {
+                        var val = Math.min(this.max, Math.max(this.min, Number(event.currentTarget.value)));
+                        console.log("Updating: " + val);
+                        this.$emit('update:value', val);
+                    }
+
+                }
+            });
+        });
+</script>
