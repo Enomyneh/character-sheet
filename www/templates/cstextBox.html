@@ -1,0 +1,39 @@
+<!-- Usage:
+    <cstextbox v-model="property"></cstextbox>
+-->
+
+<template id="cstextbox">
+    <div>
+        <label :for="value" class="col-lg-2 control-label">
+            {{value}}</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" :id="value" :title="value" v-model="value">
+        </div>
+    </div>
+</template>
+
+<script type="text/javascript">
+    requirejs.config({
+        baseUrl: 'js/lib',
+        paths: {
+            app: '../app',
+            models: '../app/models',
+            data: '../../data',
+        }
+    });
+    requirejs([
+        'vue'
+    ],
+
+        function (Vue) {
+            console.log("Registering cstextbox template.")
+
+            Vue.component('cstextbox', {
+                props: ['value'],
+                data: function () { return this.value; },
+                template: '#cstextbox',
+                components: {},
+                methods: {}
+            });
+        });
+</script>

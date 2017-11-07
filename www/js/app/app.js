@@ -17,10 +17,10 @@ requirejs.config({
 requirejs(['jquery', 'vue', 'app/CharacterEditor'],
     function ($, Vue, CharacterEditor) {
 
-        var characterEditor = new CharacterEditor();;
+        var characterEditor = new CharacterEditor();
 
         var controller = new Vue({
-            el: '#characterEditor',
+            el: '#app',
             data: characterEditor,
             computed: {},
             methods: {},

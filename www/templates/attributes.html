@@ -1,0 +1,71 @@
+<!-- Usage:
+    <attributes :attributes="attributes"></attributes>
+-->
+
+<template id="attributes">
+    <div>
+        <legend>Attributes</legend>
+        <label for="intelligence" class="col-lg-2 control-label">intelligence</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="intelligence" title="intelligence" :value="attributes.intelligence">
+        </div>
+        <label for="wits" class="col-lg-2 control-label">wits</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="wits" title="wits" :value="attributes.wits">
+        </div>
+        <label for="resolve" class="col-lg-2 control-label">resolve</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="resolve" title="resolve" :value="attributes.resolve">
+        </div>
+        <label for="strength" class="col-lg-2 control-label">strength</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="strength" title="strength" :value="attributes.strength">
+        </div>
+        <label for="dexterity" class="col-lg-2 control-label">dexterity</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="dexterity" title="dexterity" :value="attributes.dexterity">
+        </div>
+        <label for="stamina" class="col-lg-2 control-label">stamina</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="stamina" title="stamina" :value="attributes.stamina">
+        </div>
+        <label for="presence" class="col-lg-2 control-label">presence</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="presence" title="presence" :value="attributes.presence">
+        </div>
+        <label for="manipulation" class="col-lg-2 control-label">manipulation</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="manipulation" title="manipulation" :value="attributes.manipulation">
+        </div>
+        <label for="composure" class="col-lg-2 control-label">composure</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="composure" title="composure" :value="attributes.composure">
+        </div>
+    </div>
+</template>
+
+<script type="text/javascript">
+    requirejs.config({
+        baseUrl: 'js/lib',
+        paths: {
+            app: '../app',
+            models: '../app/models',
+            data: '../../data',
+        }
+    });
+    requirejs([
+        'vue'
+    ],
+
+        function (Vue) {
+            console.log("Registering attributes template.")
+
+            Vue.component('attributes', {
+                props: ['attributes'],
+                data: function () { return this.attributes; },
+                template: '#attributes',
+                components: {},
+                methods: {}
+            });
+        });
+</script>

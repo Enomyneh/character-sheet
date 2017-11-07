@@ -1,22 +1,23 @@
-define(function() {
+define(function () {
 
     console.log("Initialising Character definition");
 
+    // This is specificallly a Mage the Awakening Character
     function Character() {
-        this.initialize = function() {
+        this.initialize = function () {
             console.log("Creating Character");
 
         };
 
-        this.gender = "";
+        this.name = "";
+        this.age = 0;
+        this.player = "Your name here";
+        this.chronicle = "";
+        this.concept = "";
+        this.virtue = "";
+        this.vice = "";
 
-        this.name = {};
-        this.name.prefix = "";
-        this.name.first = "";
-        this.name.last = "";
-        this.name.suffix = "";
-
-        this.birthday = "";
+        this.attributes = {};
 
         this.initialize();
     }

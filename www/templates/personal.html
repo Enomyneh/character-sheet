@@ -1,0 +1,75 @@
+<!-- Usage:
+    <personal :character="character"></personal>
+-->
+
+<template id="personal">
+    <div>
+        <legend>Personal</legend>
+        <label for="name" class="col-lg-2 control-label">name</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="name" title="name" :value="character.name">
+        </div>
+        <label for="age" class="col-lg-2 control-label">age</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="age" title="age" :value="character.age">
+        </div>
+        <label for="player" class="col-lg-2 control-label">player</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="player" title="player" :value="character.player">
+        </div>
+        <label for="chronicle" class="col-lg-2 control-label">chronicle</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="chronicle" title="chronicle" :value="character.chronicle">
+        </div>
+        <label for="concept" class="col-lg-2 control-label">concept</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="concept" title="concept" :value="character.concept">
+        </div>
+        <label for="virtue" class="col-lg-2 control-label">virtue</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="virtue" title="virtue" :value="character.virtue">
+        </div>
+        <label for="vice" class="col-lg-2 control-label">vice</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="vice" title="vice" :value="character.vice">
+        </div>
+        <label for="path" class="col-lg-2 control-label">path</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="path" title="path" :value="character.path">
+        </div>
+        <label for="order" class="col-lg-2 control-label">order</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="order" title="order" :value="character.order">
+        </div>
+        <label for="cabal" class="col-lg-2 control-label">cabal</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="cabal" title="cabal" :value="character.cabal">
+        </div>
+    </div>
+</template>
+
+<script type="text/javascript">
+    requirejs.config({
+        baseUrl: 'js/lib',
+        paths: {
+            app: '../app',
+            models: '../app/models',
+            data: '../../data',
+        }
+    });
+    requirejs([
+        'vue'
+    ],
+
+        function (Vue) {
+            console.log("Registering personal template.")
+
+            Vue.component('personal', {
+                props: ['character'],
+                data: function () { return this.character; },
+                template: '#personal',
+                components: {},
+                methods: {}
+            });
+        });
+</script>

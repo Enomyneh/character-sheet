@@ -1,29 +1,42 @@
-define(["models/Character", "app/CharacterGenerator"], function(Character, CharacterGenerator) {
+define(["models/Character", "app/CharacterGenerator", "store"], function (Character, CharacterGenerator, store) {
 
-    function CharacterEditor() {
+    return function CharacterEditor() {
         console.log("Initialising CharacterEditor definition");
 
         // fields
-        this.loadedCharacter = undefined;
+        this.loadedCharacter = {};
+        this.counter = 10;
 
         // methods
-        this.initialize = function() {
+        this.initialize = function () {
             console.log("Creating CharacterEditor");
-            this.loadedCharacter = new Character();
+            if (!store.get("character")) {
+                this.loadedCharacter = new Character();
+            } else {
+                this.loadedCharacter = store.get("character");
+            }
         };
 
-        this.createCharacter = function() {
+        this.createCharacter = function () {
             console.log("New character");
             this.loadedCharacter = new Character();
+            this.counter++;
         };
 
-        this.createRandomCharacter = function() {
+        this.createRandomCharacter = function () {
             this.loadedCharacter = CharacterGenerator.generateRandomCharacter();
+            this.counter++;
+        };
+
+        this.saveLocally = function () {
+            store.set("character", this.loadedCharacter);
+        };
+
+        this.loadLocally = function () {
+            this.loadedCharacter = store.get("character");
         };
 
         // Initialise
         this.initialize();
-    }
-
-    return CharacterEditor;
+    };
 });

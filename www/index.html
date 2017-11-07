@@ -28,16 +28,18 @@
 </head>
 
 <body>
-    <script id="app">
-        function loadWebComponent(name, path) {
-            $.get("./" + path + name + ".html", function (content) {
-                $("#" + name).replaceWith(content);
-            });
-        }
-        loadWebComponent("app", "html/");
-    </script>
+    <div id="mainVue">
+        <script id="app">
+            function loadWebComponent(name, path) {
+                $.get("./" + path + name + ".html", function (content) {
+                    $("#" + name).replaceWith(content);
+                });
+            }
+            loadWebComponent("app", "html/");
+        </script>
+    </div>
     <script id="templates">
-        loadWebComponent("templates", "html/");
+            loadWebComponent("templates", "html/");
     </script>
 </body>
 
