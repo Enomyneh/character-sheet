@@ -1,0 +1,65 @@
+<!-- Usage:
+    <flaws v-model="character"></flaws>
+-->
+
+<template id="flaws">
+    <fieldset>
+        <legend>Flaws</legend>
+        <div class="col-lg-6" v-for="(flaw, index) in character.flaws">
+            <input type="text" class="col-lg-10 form-control" v-model="flaw" @input="updateflaw(index, flaw)">
+            <div class="col-lg-2 text-danger" @click="removeFlaw(flaw)">Delete</div>
+        </div>
+        <span @click="addFlaw()" class="text-info">Add flaw</span>
+        <!-- <csdots v-for="flaw in getflaws()" key="flaw.name" :value.sync="character[flaw.name.toLowerCase()]" :label="flaw.name" :min="0"
+            :max="5"></csdots> -->
+
+    </fieldset>
+</template>
+
+<script type="text/javascript">
+    requirejs.config({
+        baseUrl: 'js/lib',
+        paths: {
+            app: '../app',
+            models: '../app/models',
+            data: '../../data',
+        }
+    });
+    requirejs([
+        'vue',
+        'json!data/flaws.json'
+    ],
+
+        function (Vue, flaws) {
+            console.log("Registering flaws template.")
+
+            Vue.component('flaws', {
+                model: {
+                    prop: 'character'
+                },
+                props: ['character'],
+                data: function () {
+                    return this.character;
+                },
+                template: '#flaws',
+                components: {},
+                methods: {
+                    addFlaw: function () {
+                        this.character.flaws.push("");
+                    },
+                    removeFlaw: function (flaw) {
+                        this.character.flaws.splice(this.character.flaws.indexOf(flaw), 1);
+                    },
+                    getflaws: function () {
+                        return flaws;
+                    },
+                    updateflaw: function (index, flaw) {
+                        this.character.flaws[index] = flaw;
+
+                        console.log("Updating: " + flaw);
+                        // this.$emit('update:value', event.currentTarget.value);
+                    }
+                }
+            });
+        });
+</script>

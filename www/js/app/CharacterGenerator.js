@@ -7,7 +7,8 @@ define([
     'json!data/vices.json',
     'json!data/paths.json',
     'json!data/orders.json',
-    'json!data/flaws.json'
+    'json!data/flaws.json',
+    'json!data/merits.json'
 ], function (
     Character,
     Chance,
@@ -17,7 +18,8 @@ define([
     vices,
     paths,
     orders,
-    flaws) {
+    flaws,
+    merits) {
 
         function CharacterGenerator() {
             console.log("Initialising CharacterGenerator definition");
@@ -56,7 +58,9 @@ define([
                 character.virtue = chance.pickone(virtues).name;
                 character.vice = chance.pickone(vices).name;
 
-                character.flaws = chance.pickset(flaws, chance.integer({ min: 0, max: 2 }));
+                character.flaws = chance.pickset(flaws, chance.integer({ min: 0, max: 2 })).map(function (flaw) { return flaw.name; });
+
+                character.merits = chance.pickset(merits, chance.integer({ min: 0, max: 7 })).map(function (merit) { return merit.name; });
 
                 // Attributes
                 attributes.forEach(function (attribute) {

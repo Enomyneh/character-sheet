@@ -1,0 +1,53 @@
+<!-- Usage:
+    <merits v-model="character"></merits>
+-->
+
+<template id="merits">
+    <fieldset>
+        <legend>Merits</legend>
+
+        <div v-for="merit in character.merits">
+            {{merit}}
+        </div>
+
+        <!-- <csdots v-for="merit in getmerits()" key="merit.name" :value.sync="character[merit.name.toLowerCase()]" :label="merit.name"
+            :min="0" :max="5"></csdots> -->
+
+    </fieldset>
+</template>
+
+<script type="text/javascript">
+    requirejs.config({
+        baseUrl: 'js/lib',
+        paths: {
+            app: '../app',
+            models: '../app/models',
+            data: '../../data',
+        }
+    });
+    requirejs([
+        'vue',
+        'json!data/merits.json'
+    ],
+
+        function (Vue, merits) {
+            console.log("Registering merits template.")
+
+            Vue.component('merits', {
+                model: {
+                    prop: 'character'
+                },
+                props: ['character'],
+                data: function () {
+                    return this.character;
+                },
+                template: '#merits',
+                components: {},
+                methods: {
+                    getmerits: function () {
+                        return merits;
+                    }
+                }
+            });
+        });
+</script>
