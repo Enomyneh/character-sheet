@@ -1,8 +1,8 @@
 <!-- Usage:
-    <cstextbox :value.sync="__PROPERTY__" :label="'__LABEL__'"></cstextbox>
+    <cstext :value.sync="__PROPERTY__" :label="'__LABEL__'"></cstext>
 -->
 
-<template id="cstextbox">
+<template id="cstext">
     <div>
         <label :for="label" class="col-sm-2 col-md-1 control-label">
             {{label}}</label>
@@ -26,9 +26,9 @@
         ],
 
         function(Vue) {
-            console.log("Registering cstextbox template.")
+            console.log("Registering cstext template.")
 
-            Vue.component('cstextbox', {
+            Vue.component('cstext', {
                 model: {
                     prop: 'value'
                 },
@@ -46,7 +46,7 @@
                         text: this.value
                     };
                 },
-                template: '#cstextbox',
+                template: '#cstext',
                 components: {},
                 methods: {
                     updateValue: function(event) {
