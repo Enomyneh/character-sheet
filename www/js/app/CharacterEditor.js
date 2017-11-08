@@ -2,14 +2,12 @@ define(
     [
         "models/Character",
         "app/CharacterGenerator",
-        "store",
-        "mousetrap"
+        "store"
     ],
     function(
         Character,
         CharacterGenerator,
-        store,
-        Mousetrap) {
+        store) {
 
         return function CharacterEditor() {
             console.log("Initialising CharacterEditor definition");
@@ -24,13 +22,8 @@ define(
                 if (!store.get("character")) {
                     this.loadedCharacter = new Character();
                 } else {
-                    this.loadedCharacter = store.get("character");
+                    this.loadedCharacter = new Character(store.get("character"));
                 }
-
-                Mousetrap.bind('mod+n', function() { this.createCharacter(); return false; });
-                Mousetrap.bind('mod+r', function() { this.createRandomCharacter(); return false; });
-                Mousetrap.bind('mod+s', function() { this.saveLocally(); return false; });
-                Mousetrap.bind('mod+o', function() { this.loadLocally(); return false; });
             };
 
             this.createCharacter = function() {
@@ -49,7 +42,7 @@ define(
             };
 
             this.loadLocally = function() {
-                this.loadedCharacter = store.get("character");
+                this.loadedCharacter = new Character(store.get("character"));
             };
 
             // Initialise
