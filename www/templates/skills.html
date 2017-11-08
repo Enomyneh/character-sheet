@@ -5,9 +5,10 @@
 <template id="skills">
     <fieldset>
         <legend>Skills</legend>
-        <csdots v-for="skill in getskills()" key="skill.name" :value.sync="character[skill.name.toLowerCase()]" :label="skill.name"
-            :min="0" :max="5"></csdots>
-
+            <div v-for="skill in getskills()" key="skill.name" >
+                <label :for="label" class="col-xs-6 col-sm-3 col-md-2 control-label">{{skill.name}}</label>
+                <csdots class="col-xs-6 col-sm-3 col-md-2" :value.sync="character[skill.name.toLowerCase()]" :label="skill.name" :min="0" :max="5"></csdots>
+            </div>
     </fieldset>
 </template>
 
@@ -21,11 +22,11 @@
         }
     });
     requirejs([
-        'vue',
-        'json!data/skills.json'
-    ],
+            'vue',
+            'json!data/skills.json'
+        ],
 
-        function (Vue, skills) {
+        function(Vue, skills) {
             console.log("Registering skills template.")
 
             Vue.component('skills', {
@@ -33,13 +34,13 @@
                     prop: 'character'
                 },
                 props: ['character'],
-                data: function () {
+                data: function() {
                     return this.character;
                 },
                 template: '#skills',
                 components: {},
                 methods: {
-                    getskills: function () {
+                    getskills: function() {
                         return skills;
                     }
                 }

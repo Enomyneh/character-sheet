@@ -1,4 +1,8 @@
-define(function() {
+define([
+    'json!data/attributes.json',
+    'json!data/skills.json'
+], function(attributes,
+    skills) {
 
     console.log("Initialising Character definition");
 
@@ -17,15 +21,18 @@ define(function() {
         this.virtue = "";
         this.vice = "";
 
-        this.intelligence = 1;
-        this.wits = 1;
-        this.resolve = 1;
-        this.strength = 1;
-        this.dexterity = 1;
-        this.stamina = 1;
-        this.presence = 1;
-        this.manipulation = 1;
-        this.composure = 1;
+        // Skills
+        skills.forEach(function(skill) {
+            this[skill.name.toLowerCase()] = 0;
+        }, this);
+
+        // Attributes
+        attributes.forEach(function(attribute) {
+            this[attribute.name.toLowerCase()] = 1;
+        }, this);
+
+        this.flaws = [];
+        this.merits = [];
 
         this.initialize();
     }

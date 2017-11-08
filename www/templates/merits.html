@@ -5,14 +5,18 @@
 <template id="merits">
     <fieldset>
         <legend>Merits</legend>
-
-        <div v-for="merit in character.merits">
-            {{merit}}
-        </div>
-
+            <div class="col-xs-12" v-for="(merit, index) in character.merits">
+                <div class="input-group col-xs-6 col-sm-3">
+                    <input type="text" class="form-control" v-model="merit.name" @input="updateMerit(index, merit)">
+                    <div class="input-group-addon btn-danger" @click="removeMerit(index)">❌</div>
+                </div>
+                <csdots class="col-xs-6 col-sm-3" :value.sync="merit.dots" :min="1" :max="5"></csdots>
+            </div>
+            <div class="col-xs-12">
+                <button class="btn btn-xs btn-info" @click="addMerit()">➕</button>
+            </div>
         <!-- <csdots v-for="merit in getmerits()" key="merit.name" :value.sync="character[merit.name.toLowerCase()]" :label="merit.name"
             :min="0" :max="5"></csdots> -->
-
     </fieldset>
 </template>
 
@@ -26,11 +30,11 @@
         }
     });
     requirejs([
-        'vue',
-        'json!data/merits.json'
-    ],
+            'vue',
+            'json!data/merits.json'
+        ],
 
-        function (Vue, merits) {
+        function(Vue, merits) {
             console.log("Registering merits template.")
 
             Vue.component('merits', {
@@ -38,14 +42,26 @@
                     prop: 'character'
                 },
                 props: ['character'],
-                data: function () {
+                data: function() {
                     return this.character;
                 },
                 template: '#merits',
                 components: {},
                 methods: {
-                    getmerits: function () {
-                        return merits;
+                    addMerit: function() {
+                        this.character.merits.push({
+                            name: "",
+                            dots: 1
+                        });
+                    },
+                    removeMerit: function(index) {
+                        this.character.merits.splice(index, 1);
+                    },
+                    updateMerit: function(index, merit) {
+                        this.character.merits[index] = merit;
+
+                        console.log("Updating: " + merit);
+                        // this.$emit('update:value', event.currentTarget.value);
                     }
                 }
             });

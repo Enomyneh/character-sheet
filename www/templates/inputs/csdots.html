@@ -3,12 +3,9 @@
 -->
 
 <template id="csdots">
-    <div>
-        <label :for="label" class="col-xs-6 col-sm-2 control-label">
-            {{label}}</label>
-        <div class="col-xs-6 col-sm-2">
-            <input type="number" :min="min" :max="max" class="form-control" :id="label" :value="value" @input="updateValue">
-        </div>
+    <div style="font-size:x-large; line-height: 1; margin-top: -2px; margin-bottom: 5px;" v-on:mouseover="focus = !focus">
+        <!-- <input type="number" :min="min" :max="max" class="form-control" :id="label" :value="value" @input="updateValue"> -->
+        <img src="..\img\delete.png" @click="decrement" :style="{visibility: visibility}"/><span v-for="n in value">●</span><span v-for="n in unfilled()">○</span><img src="..\img\add.png" @click="increment" />
     </div>
 </template>
 
@@ -48,7 +45,8 @@
                     label: {
                         type: String,
                         required: true
-                    }
+                    },
+                    focus: {}
                 },
                 data: function() {
                     return {
@@ -56,12 +54,32 @@
                     };
                 },
                 template: '#csdots',
-                components: {},
+                calculated: {},
                 methods: {
+                    visibility: function() {
+                        if (this.focus) {
+                            return "visible";
+                        } else {
+                            return "hidden";
+                        }
+                    },
                     updateValue: function(event) {
-                        var val = Math.min(this.max, Math.max(this.min, Number(event.currentTarget.value)));
-                        console.log("Updating: " + val);
-                        this.$emit('update:value', val);
+                        this.setValue(Number(event.currentTarget.value));
+                        // var val = Math.min(this.max, Math.max(this.min, Number(event.currentTarget.value)));
+                        // console.log("Updating: " + val);
+                        // this.$emit('update:value', val);
+                    },
+                    unfilled: function() {
+                        return this.max - this.value;
+                    },
+                    increment: function() {
+                        this.setValue(this.value + 1);
+                    },
+                    decrement: function() {
+                        this.setValue(this.value - 1);
+                    },
+                    setValue: function(newValue) {
+                        this.value = Math.min(this.max, Math.max(newValue));
                     }
 
                 }

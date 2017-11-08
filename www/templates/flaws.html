@@ -5,14 +5,15 @@
 <template id="flaws">
     <fieldset>
         <legend>Flaws</legend>
-        <div class="col-lg-6" v-for="(flaw, index) in character.flaws">
-            <input type="text" class="col-lg-10 form-control" v-model="flaw" @input="updateflaw(index, flaw)">
-            <div class="col-lg-2 text-danger" @click="removeFlaw(flaw)">Delete</div>
+        <div class="col-xs-12 col-sm-4" v-for="(flaw, index) in character.flaws">
+            <div class="input-group">
+                <input type="text" class="form-control" v-model="flaw" @input="updateflaw(index, flaw)">
+                <div class="input-group-addon btn-danger" @click="removeFlaw(index)">❌</div>
+            </div>
         </div>
-        <span @click="addFlaw()" class="text-info">Add flaw</span>
-        <!-- <csdots v-for="flaw in getflaws()" key="flaw.name" :value.sync="character[flaw.name.toLowerCase()]" :label="flaw.name" :min="0"
-            :max="5"></csdots> -->
-
+        <div class="col-xs-12">
+            <button class="btn btn-xs btn-info" @click="addFlaw()">➕</button>
+        </div>
     </fieldset>
 </template>
 
@@ -26,11 +27,11 @@
         }
     });
     requirejs([
-        'vue',
-        'json!data/flaws.json'
-    ],
+            'vue',
+            'json!data/flaws.json'
+        ],
 
-        function (Vue, flaws) {
+        function(Vue, flaws) {
             console.log("Registering flaws template.")
 
             Vue.component('flaws', {
@@ -38,25 +39,21 @@
                     prop: 'character'
                 },
                 props: ['character'],
-                data: function () {
+                data: function() {
                     return this.character;
                 },
                 template: '#flaws',
                 components: {},
                 methods: {
-                    addFlaw: function () {
+                    addFlaw: function() {
                         this.character.flaws.push("");
                     },
-                    removeFlaw: function (flaw) {
-                        this.character.flaws.splice(this.character.flaws.indexOf(flaw), 1);
+                    removeFlaw: function(index) {
+                        this.character.flaws.splice(index, 1);
                     },
-                    getflaws: function () {
-                        return flaws;
-                    },
-                    updateflaw: function (index, flaw) {
+                    updateflaw: function(index, flaw) {
                         this.character.flaws[index] = flaw;
 
-                        console.log("Updating: " + flaw);
                         // this.$emit('update:value', event.currentTarget.value);
                     }
                 }
