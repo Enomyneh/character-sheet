@@ -1,15 +1,14 @@
 <!-- Usage:
-    <attributes v-model="character"></attributes>
+    <arcana v-model="character"></arcana>
 -->
 
-<template id="attributes">
+<template id="arcana">
     <fieldset>
-        <legend>Attributes</legend>
-        <div v-for="attribute in getAttributes()" key="attribute.name" >
-            <label :for="label" class="col-xs-6 col-sm-3 col-md-2 control-label">{{attribute.name}}</label>
-            <csdots class="col-xs-6 col-sm-3 col-md-2" :value.sync="character[attribute.name.toLowerCase()]" :label="attribute.name" :min="1" :max="5"></csdots>
+        <legend>Arcana</legend>
+        <div v-for="arcanum in getArcana()" key="arcanum.name" >
+            <label :for="label" class="col-xs-6 col-sm-3 col-md-2 control-label">{{arcanum.name}}</label>
+            <csdots class="col-xs-6 col-sm-3 col-md-2" :value.sync="character[arcanum.name.toLowerCase()]" :label="arcanum.name" :min="0" :max="5"></csdots>
         </div>
-
     </fieldset>
 </template>
 
@@ -24,13 +23,13 @@
     });
     requirejs([
             'vue',
-            'json!data/attributes.json'
+            'json!data/arcana.json'
         ],
 
-        function(Vue, attributes) {
-            console.log("Registering attributes template.")
+        function(Vue, arcana) {
+            console.log("Registering arcana template.")
 
-            Vue.component('attributes', {
+            Vue.component('arcana', {
                 model: {
                     prop: 'character'
                 },
@@ -38,11 +37,11 @@
                 data: function() {
                     return this.character;
                 },
-                template: '#attributes',
+                template: '#arcana',
                 components: {},
                 methods: {
-                    getAttributes: function() {
-                        return attributes;
+                    getArcana: function() {
+                        return arcana;
                     }
                 }
             });

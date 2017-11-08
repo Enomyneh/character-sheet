@@ -1,8 +1,11 @@
 define([
     'json!data/attributes.json',
-    'json!data/skills.json'
-], function(attributes,
-    skills) {
+    'json!data/skills.json',
+    'json!data/arcana.json'
+], function(
+    attributes,
+    skills,
+    aracana) {
 
     console.log("Initialising Character definition");
 
@@ -29,6 +32,11 @@ define([
         // Attributes
         attributes.forEach(function(attribute) {
             this[attribute.name.toLowerCase()] = 1;
+        }, this);
+
+        // Aracana
+        arcana.forEach(function(arcanum) {
+            this[arcanum.name.toLowerCase()] = 0;
         }, this);
 
         this.flaws = [];

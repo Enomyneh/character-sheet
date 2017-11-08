@@ -8,7 +8,8 @@ define([
     'json!data/paths.json',
     'json!data/orders.json',
     'json!data/flaws.json',
-    'json!data/merits.json'
+    'json!data/merits.json',
+    'json!data/arcana.json'
 ], function(
     Character,
     Chance,
@@ -19,7 +20,8 @@ define([
     paths,
     orders,
     flaws,
-    merits) {
+    merits,
+    arcana) {
 
     function CharacterGenerator() {
         console.log("Initialising CharacterGenerator definition");
@@ -72,9 +74,15 @@ define([
                 character[attribute.name.toLowerCase()] = chance.integer({ min: 1, max: 5 });
             }, this);
 
+            // Skills
             skills.forEach(function(skill) {
                 character[skill.name.toLowerCase()] = chance.integer({ min: 0, max: 5 });
                 character[skill.name.toLowerCase()].specialities = chance.pickset(skill.specialties, chance.integer({ min: 0, max: 2 }))
+            }, this);
+
+            // Arcana
+            arcana.forEach(function(arcanum) {
+                character[arcanum.name.toLowerCase()] = chance.integer({ min: 0, max: 5 });
             }, this);
 
 
