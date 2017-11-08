@@ -6,8 +6,8 @@
     <fieldset>
         <legend>Attributes</legend>
         <div v-for="attribute in getAttributes()" key="attribute.name" >
-            <label :for="label" class="col-xs-6 col-sm-3 col-md-2 control-label">{{attribute.name}}</label>
-            <csdots class="col-xs-6 col-sm-3 col-md-2" :value.sync="character[attribute.name.toLowerCase()]" :label="attribute.name" :min="1" :max="5"></csdots>
+            <label class="col-xs-6 col-sm-3 col-md-2 control-label">{{attribute.name}}</label>
+            <csdots class="col-xs-6 col-sm-3 col-md-2" :value.sync="character[attribute.name.toLowerCase()]" :min="1" :max="5"></csdots>
         </div>
 
     </fieldset>

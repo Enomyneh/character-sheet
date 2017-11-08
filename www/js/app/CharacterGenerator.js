@@ -45,7 +45,7 @@ define([
             character.nameParts.suffix = '';
             // character.nameParts.suffix = chance.suffix();
 
-            character.name = character.nameParts.prefix + ' ' + character.nameParts.first + ' ' + character.nameParts.last + ' ' + character.nameParts.suffix;
+            character.name = (character.nameParts.prefix + ' ' + character.nameParts.first + ' ' + character.nameParts.last + ' ' + character.nameParts.suffix).trim();
             character.birthday = chance.birthday();
             character.countryOfBirth = chance.country({ full: true });
             character.age = Math.floor((Date.now() - character.birthday) / (1000 * 60 * 60 * 24 * 365));
@@ -60,7 +60,11 @@ define([
             character.virtue = chance.pickone(virtues).name;
             character.vice = chance.pickone(vices).name;
 
-            character.flaws = chance.pickset(flaws, chance.integer({ min: 0, max: 2 })).map(function(flaw) { return flaw.name; });
+            character.flaws = chance.pickset(flaws, chance.integer({ min: 0, max: 2 })).map(function(flaw) {
+                return {
+                    name: flaw.name
+                };
+            });
 
             character.merits = chance.pickset(merits, chance.integer({ min: 0, max: 7 })).map(function(merit) {
                 return {

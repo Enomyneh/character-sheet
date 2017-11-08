@@ -22,6 +22,8 @@
                                 <li><a href="#" @click="createRandomCharacter()">Random Character</a></li>
                                 <li><a href="#" @click="saveLocally()">Save to browser</a></li>
                                 <li><a href="#" @click="loadLocally()">Load from browser</a></li>
+                                <li><a href="#" @click="saveToFile()">Save to file</a></li>
+                                <li><a href="#" onclick="document.getElementById('openFile').click()">Load from file</a><input id="openFile" type="file" accept=".json" @change="openFile" style="display:none" /></li>
                             </ul>
                         </li>
                     </ul>

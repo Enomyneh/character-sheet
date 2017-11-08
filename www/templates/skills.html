@@ -5,9 +5,9 @@
 <template id="skills">
     <fieldset>
         <legend>Skills</legend>
-            <div v-for="skill in getskills()" key="skill.name" >
-                <label :for="label" class="col-xs-6 col-sm-3 col-md-2 control-label">{{skill.name}}</label>
-                <csdots class="col-xs-6 col-sm-3 col-md-2" :value.sync="character[skill.name.toLowerCase()]" :label="skill.name" :min="0" :max="5"></csdots>
+            <div v-for="skill in getSkills()" key="skill.name" >
+                <label class="col-xs-6 col-sm-3 col-md-2 control-label">{{skill.name}}</label>
+                <csdots class="col-xs-6 col-sm-3 col-md-2" :value.sync="character[skill.name.toLowerCase()]" :min="0" :max="5"></csdots>
             </div>
     </fieldset>
 </template>
@@ -40,7 +40,7 @@
                 template: '#skills',
                 components: {},
                 methods: {
-                    getskills: function() {
+                    getSkills: function() {
                         return skills;
                     }
                 }

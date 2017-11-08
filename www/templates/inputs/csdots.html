@@ -3,9 +3,9 @@
 -->
 
 <template id="csdots">
-    <div style="margin-top: 2px; margin-bottom: 3px;" v-on:mouseover="focus = !focus">
+    <div style="margin-top: 2px; margin-bottom: 3px;">
         <!-- <input type="number" :min="min" :max="max" class="form-control" :id="label" :value="value" @input="updateValue"> -->
-        <img src="..\img\delete.png" @click="decrement" :style="{visibility: visibility}"/>
+        <img src="..\img\delete.png" @click="decrement"/>
         <span v-for="n in value"><img src="..\img\filled.png"></span><span v-for="n in unfilled()"><img src="..\img\empty.png"></span>
         <img src="..\img\add.png" @click="increment" />
     </div>
@@ -43,12 +43,7 @@
                     max: {
                         type: Number,
                         required: true
-                    },
-                    label: {
-                        type: String,
-                        required: true
-                    },
-                    focus: {}
+                    }
                 },
                 data: function() {
                     return {
@@ -58,13 +53,6 @@
                 template: '#csdots',
                 calculated: {},
                 methods: {
-                    visibility: function() {
-                        if (this.focus) {
-                            return "visible";
-                        } else {
-                            return "hidden";
-                        }
-                    },
                     updateValue: function(event) {
                         this.setValue(Number(event.currentTarget.value));
                         // var val = Math.min(this.max, Math.max(this.min, Number(event.currentTarget.value)));
