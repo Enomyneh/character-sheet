@@ -1,12 +1,12 @@
 <!-- Usage:
-    <attributes v-model="character"></attributes>
+    <skills v-model="character"></skills>
 -->
 
-<template id="attributes">
+<template id="skills">
     <fieldset>
-        <legend>Attributes</legend>
-        <csdots v-for="attribute in getAttributes()" key="attribute.name" :value.sync="character[attribute.name.toLowerCase()]" :label="attribute.name"
-            :min="1" :max="5"></csdots>
+        <legend>Skills</legend>
+        <csdots v-for="skill in getskills()" key="skill.name" :value.sync="character[skill.name.toLowerCase()]" :label="skill.name"
+            :min="0" :max="5"></csdots>
 
     </fieldset>
 </template>
@@ -22,13 +22,13 @@
     });
     requirejs([
         'vue',
-        'json!data/attributes.json'
+        'json!data/skills.json'
     ],
 
-        function (Vue, attributes) {
-            console.log("Registering attributes template.")
+        function (Vue, skills) {
+            console.log("Registering skills template.")
 
-            Vue.component('attributes', {
+            Vue.component('skills', {
                 model: {
                     prop: 'character'
                 },
@@ -36,11 +36,11 @@
                 data: function () {
                     return this.character;
                 },
-                template: '#attributes',
+                template: '#skills',
                 components: {},
                 methods: {
-                    getAttributes: function () {
-                        return attributes;
+                    getskills: function () {
+                        return skills;
                     }
                 }
             });
