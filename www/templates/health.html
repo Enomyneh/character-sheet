@@ -1,0 +1,54 @@
+<!-- Usage:
+    <health v-model="character"></health>
+-->
+<template id="health">
+    <fieldset>
+        <legend>Health</legend>
+        <div style="float:clear;">
+            <img v-for="n in character.maxHealth()" src=".\img\filled.png"><img v-for="n in unusedSpace()" src=".\img\empty.png">
+        </div>
+        <div style="float:clear;">
+            <img v-for="n in character.aggravatedDamage" src=".\img\box-asterix.png"><img v-for="n in character.lethalDamage" src=".\img\box-cross.png"><img v-for="n in character.bashingDamage" src=".\img\box-stroke.png"><img v-for="n in undamaged()" src=".\img\box-empty.png"><img v-for="n in unusedSpace()" src=".\img\box-empty-grey.png">
+        </div>
+    </fieldset>
+</template>
+<script type="text/javascript">
+    requirejs.config({
+        baseUrl: 'js/lib',
+        paths: {
+            app: '../app',
+            models: '../app/models',
+            data: '../../data',
+        }
+    });
+    requirejs([
+        'vue'
+    ],
+
+        function (Vue) {
+            console.log("Registering health template.")
+
+            Vue.component('health', {
+                model: {
+                    prop: 'character'
+                },
+                props: ['character'],
+                data: function () {
+                    return this.character;
+                },
+                template: '#health',
+                components: {},
+                methods: {
+                    undamaged: function () {
+                        return this.character.maxHealth() - (this.character.bashingDamage + this.character.lethalDamage + this.character.aggravatedDamage);
+                    },
+                    emptyDots: function () {
+                        return 15 - this.character.maxHealth();
+                    },
+                    unusedSpace: function () {
+                        return 15 - this.character.maxHealth();
+                    },
+                }
+            });
+        });
+</script>

@@ -6,6 +6,10 @@
     <div>
         <div class="form-group">
             <personal v-model="character"></personal>
+            <wisdom v-model="character"></wisdom>
+            <mana v-model="character"></mana>
+            <willpower v-model="character"></willpower>
+            <health v-model="character"></health>
             <attributes v-model="character"></attributes>
             <skills v-model="character"></skills>
             <merits v-model="character"></merits>
@@ -25,10 +29,10 @@
         }
     });
     requirejs([
-            'vue'
-        ],
+        'vue'
+    ],
 
-        function(Vue) {
+        function (Vue) {
             console.log("Registering character template.")
 
             Vue.component('character', {
@@ -36,7 +40,7 @@
                     prop: 'character'
                 },
                 props: ['character'],
-                data: function() {
+                data: function () {
                     return this.character;
                 },
                 template: '#characterTemplate',
