@@ -91,6 +91,19 @@ define([
             return this.dexterity + this.strength + 5;
         };
 
+
+        // Damage Calculations
+        this.damage = function(type, amount) {
+            switch (type) {
+                case 'A':
+                    break;
+                case 'L':
+                    break;
+                case 'B':
+                    break;
+            }
+        };
+
         this.initialize(character);
     }
 

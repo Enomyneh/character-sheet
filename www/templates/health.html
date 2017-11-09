@@ -4,12 +4,26 @@
 <template id="health">
     <fieldset>
         <legend>Health</legend>
-        <div style="float:clear;">
+        <div>
             <img v-for="n in character.maxHealth()" src=".\img\filled.png"><img v-for="n in unusedSpace()" src=".\img\empty.png">
         </div>
-        <div style="float:clear;">
+        <div>
             <img v-for="n in character.aggravatedDamage" src=".\img\box-asterix.png"><img v-for="n in character.lethalDamage" src=".\img\box-cross.png"><img v-for="n in character.bashingDamage" src=".\img\box-stroke.png"><img v-for="n in undamaged()" src=".\img\box-empty.png"><img v-for="n in unusedSpace()" src=".\img\box-empty-grey.png">
         </div>
+        <div>
+            <img src=".\img\delete.png" @click="character.damage('A', -1)"/>
+            <img src=".\img\box-asterix.png">
+            <img src=".\img\add.png" @click="character.damage('A', 1)" />
+
+            <img src=".\img\delete.png" @click="character.damage('L', -1)"/>
+            <img src=".\img\box-cross.png">
+            <img src=".\img\add.png" @click="character.damage('L', 1)" />
+                
+            <img src=".\img\delete.png" @click="character.damage('B', -1)"/>
+            <img src=".\img\box-stroke.png">
+            <img src=".\img\add.png" @click="character.damage('B', 1)" />
+        </div>
+    
     </fieldset>
 </template>
 <script type="text/javascript">
@@ -22,10 +36,10 @@
         }
     });
     requirejs([
-        'vue'
-    ],
+            'vue'
+        ],
 
-        function (Vue) {
+        function(Vue) {
             console.log("Registering health template.")
 
             Vue.component('health', {
@@ -33,21 +47,21 @@
                     prop: 'character'
                 },
                 props: ['character'],
-                data: function () {
+                data: function() {
                     return this.character;
                 },
                 template: '#health',
                 components: {},
                 methods: {
-                    undamaged: function () {
+                    undamaged: function() {
                         return this.character.maxHealth() - (this.character.bashingDamage + this.character.lethalDamage + this.character.aggravatedDamage);
                     },
-                    emptyDots: function () {
+                    emptyDots: function() {
                         return 15 - this.character.maxHealth();
                     },
-                    unusedSpace: function () {
+                    unusedSpace: function() {
                         return 15 - this.character.maxHealth();
-                    },
+                    }
                 }
             });
         });
