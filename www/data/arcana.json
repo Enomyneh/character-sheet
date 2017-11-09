@@ -1,11 +1,11 @@
 [{
         "name": "Death",
         "summary": "",
-        "tools": ["Bones, shroud, today’s obituary column, Ouija            board (the mage must use the planchette during casting)"]
+        "tools": ["Bones, shroud, today’s obituary column, Ouija board (the mage must use the planchette during casting)"]
     },
     {
         "name": "Fate",
-        "tools": ["Playing cards or dice (the mage must draw or reveal            a card or roll the dice during casting)"]
+        "tools": ["Playing cards or dice (the mage must draw or reveal a card or roll the dice during casting)"]
     },
     {
         "name": "Forces",
@@ -13,7 +13,7 @@
     },
     {
         "name": "Life",
-        "tools": ["Blood (freshly drawn; does not need to be dedicated),            prominent tattoo, flowers (freshly picked; does not need to            be dedicated)"]
+        "tools": ["Blood (freshly drawn; does not need to be dedicated), prominent tattoo, flowers (freshly picked; does not need to be dedicated)"]
     },
     {
         "name": "Matter",
@@ -29,11 +29,11 @@
     },
     {
         "name": "Space",
-        "tools": ["Ruler, tape measure, wheel, sextant, mathematical            equation"]
+        "tools": ["Ruler, tape measure, wheel, sextant, mathematical equation"]
     },
     {
         "name": "Spirit",
-        "tools": ["Drum, rattle, flute, animal token (tooth, claw,            feather or pelt)"]
+        "tools": ["Drum, rattle, flute, animal token (tooth, claw, feather or pelt)"]
     },
     {
         "name": "Time",
