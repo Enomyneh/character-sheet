@@ -8,7 +8,7 @@
         <div v-for="n in 10">
             <div class="input-group">
                 <div class="input-group-addon"> {{11-n}}</div>
-                <input type="text" class="form-control input-sm" v-model="derangement(n)" @input="updateDerangement(n, value)">
+                <input type="text" class="form-control input-sm" v-model="character.derangements[11-n]" @input="updateDerangement(11-n, character.derangements[11-n])">
                 <div class="input-group-addon" @click="setWisdom(11-n)">
                     <img v-if="wiseAs(11-n)" src=".\img\filled.png">
                     <img v-if="!wiseAs(11-n)" src=".\img\empty.png">
@@ -27,10 +27,10 @@
         }
     });
     requirejs([
-        'vue'
-    ],
+            'vue'
+        ],
 
-        function (Vue) {
+        function(Vue) {
             console.log("Registering wisdom template. ")
 
             Vue.component('wisdom', {
@@ -38,18 +38,25 @@
                     prop: 'character'
                 },
                 props: ['character'],
-                data: function () {
+                data: function() {
                     return this.character;
                 },
                 template: '#wisdom',
                 components: {},
                 methods: {
-                    wiseAs: function(wisdom){
+                    wiseAs: function(wisdom) {
                         return this.character.wisdom >= wisdom;
                     },
-                    setWisdom: function(wisdom){
+                    setWisdom: function(wisdom) {
                         console.log("Setting wisdom to " + wisdom);
                         this.character.wisdom = wisdom;
+                    },
+                    derangement: function(index) {
+                        return this.character.derangements[index];
+                    },
+                    updateDerangement: function(index, derangement) {
+                        console.log("Updating derangement " + index + " to " + derangement);
+                        this.character.derangements[index] = derangement;
                     }
                 }
             });
