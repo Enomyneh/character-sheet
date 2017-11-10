@@ -4,14 +4,14 @@
 
 <template id="wisdom">
     <fieldset>
-        <legend>Wisdom</legend>
+        <h3>Wisdom</h3>
         <div v-for="n in 10">
             <div class="input-group">
                 <div class="input-group-addon"> {{11-n}}</div>
                 <input type="text" class="form-control input-sm" v-model="character.derangements[11-n]" @input="updateDerangement(11-n, character.derangements[11-n])">
                 <div class="input-group-addon" @click="setWisdom(11-n)">
-                    <img v-if="wiseAs(11-n)" src=".\img\filled.png">
-                    <img v-if="!wiseAs(11-n)" src=".\img\empty.png">
+                    <img v-if="wiseAs(11-n)" src=".\img\dot-filled.png">
+                    <img v-if="!wiseAs(11-n)" src=".\img\dot-empty.png">
                 </div>
             </div>
     </fieldset>

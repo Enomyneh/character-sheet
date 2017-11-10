@@ -18,15 +18,16 @@
             <div class="tab-pane fade active in" id="fullSheet">
                 <div class="form-group">
                     <personal v-model="character"></personal>
-                    <wisdom v-model="character"></wisdom>
-                    <mana v-model="character"></mana>
-                    <willpower v-model="character"></willpower>
-                    <health v-model="character"></health>
                     <attributes v-model="character"></attributes>
                     <skills v-model="character"></skills>
                     <merits v-model="character"></merits>
                     <flaws v-model="character"></flaws>
                     <arcana v-model="character"></arcana>
+                    <health v-model="character"></health>
+                    <mana v-model="character"></mana>
+                    <willpower v-model="character"></willpower>
+                    <gnosis v-model="character"></gnosis>
+                    <wisdom v-model="character"></wisdom>
                 </div>
             </div>
             <div class="tab-pane fade" id="tabs">
@@ -57,6 +58,9 @@
                     </li>
                     <li class="">
                         <a href="#mana" data-toggle="tab" aria-expanded="false">Mana</a>
+                    </li>
+                    <li class="">
+                        <a href="#gnosis" data-toggle="tab" aria-expanded="false">Gnosis</a>
                     </li>
                     <li class="">
                         <a href="#wisdom" data-toggle="tab" aria-expanded="false">Wisdom</a>
@@ -90,6 +94,9 @@
                     <div class="tab-pane fade" id="mana">
                         <mana v-model="character"></mana>
                     </div>
+                    <div class="tab-pane fade" id="gnosis">
+                        <gnosis v-model="character"></gnosis>
+                    </div>
                     <div class="tab-pane fade" id="wisdom">
                         <wisdom v-model="character"></wisdom>
                     </div>
@@ -109,10 +116,10 @@
         }
     });
     requirejs([
-        'vue'
-    ],
+            'vue'
+        ],
 
-        function (Vue) {
+        function(Vue) {
             console.log("Registering character template.")
 
             Vue.component('character', {
@@ -120,7 +127,7 @@
                     prop: 'character'
                 },
                 props: ['character'],
-                data: function () {
+                data: function() {
                     return this.character;
                 },
                 template: '#characterTemplate',

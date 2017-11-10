@@ -1,14 +1,11 @@
 <!-- Usage:
-    <willpower v-model="character"></willpower>
+    <gnosis v-model="character"></gnosis>
 -->
-<template id="willpower">
+<template id="gnosis">
     <fieldset>
-        <h3>Willpower</h3>
+        <h3>Gnosis</h3>
         <div style="float:clear;">
-            <img v-for="n in character.maxWillpower()" src=".\img\dot-filled.png"><img v-for="n in unusedSpace()" src=".\img\dot-empty.png">
-        </div>
-        <div style="float:clear;">
-            <img v-for="n in character.willpower" src=".\img\box-stroke.png"><img v-for="n in usedWillpower()" src=".\img\box-empty.png"><img v-for="n in unusedSpace()" src=".\img\box-empty-grey.png">
+            <img v-for="n in character.gnosis" src=".\img\dot-filled.png"><img v-for="n in unusedSpace()" src=".\img\dot-empty.png">
             <img src=".\img\delete.png" @click="decrement"/>
             <img src=".\img\add.png" @click="increment" />
         </div>
@@ -28,9 +25,9 @@
         ],
 
         function(Vue) {
-            console.log("Registering willpower template.")
+            console.log("Registering gnosis template.")
 
-            Vue.component('willpower', {
+            Vue.component('gnosis', {
                 model: {
                     prop: 'character'
                 },
@@ -38,23 +35,20 @@
                 data: function() {
                     return this.character;
                 },
-                template: '#willpower',
+                template: '#gnosis',
                 components: {},
                 methods: {
-                    usedWillpower: function() {
-                        return this.character.maxWillpower() - this.character.willpower;
-                    },
                     unusedSpace: function() {
-                        return 10 - this.character.maxWillpower();
+                        return 10 - this.character.gnosis;
                     },
                     increment: function() {
-                        this.setValue(this.character.willpower + 1);
+                        this.setValue(this.character.gnosis + 1);
                     },
                     decrement: function() {
-                        this.setValue(this.character.willpower - 1);
+                        this.setValue(this.character.gnosis - 1);
                     },
                     setValue: function(newValue) {
-                        this.character.willpower = Math.min(this.character.maxWillpower(), Math.max(newValue, 0));
+                        this.character.gnosis = Math.min(10, Math.max(newValue, 1));
                     }
                 }
             });

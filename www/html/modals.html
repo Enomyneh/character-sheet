@@ -24,13 +24,13 @@
                         </tr>
                     </thead>
                     <tr v-for="savedCharacter in getFilteredLocalCharacters()">
-                        <td>{{savedCharacter.character.name}}</td>
+                        <td>{{savedCharacter.characterName}}</td>
                         <td>{{new Date(savedCharacter.saveTime).toLocaleString()}}</td>
                         <td>
-                            <button type="button" class="btn btn-xs btn-success" @click="loadCharacter(savedCharacter.character)">Load</button>
+                            <button type="button" class="btn btn-xs btn-success" @click="loadLocallyFromHashCode(savedCharacter.hashCode)">Load</button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-xs btn-danger" @click="deleteSavedCharacter(savedCharacter)">Delete</button>
+                            <button type="button" class="btn btn-xs btn-danger" @click="deleteSavedCharacter(savedCharacter.hashCode)">Delete</button>
                         </td>
                     </tr>
                 </table>
