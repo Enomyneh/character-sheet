@@ -91,15 +91,106 @@ define([
             return this.dexterity + this.strength + 5;
         };
 
+        this.getTotalDamageBlocks = function() {
+            return this.bashingDamage + this.lethalDamage + this.aggravatedDamage;
+        };
 
-        // Damage Calculations
-        this.damage = function(type, amount) {
+        this.isDead = function() {
+            return this.aggravatedDamage >= this.maxHealth();
+        };
+
+        this.addBashingDamage = function() {
+
+            // Don't bother once they are dead.  You're literally flogging a dead character.
+            if (this.isDead()) return;
+
+            // If there are empty blocks, just use them.
+            if (this.getTotalDamageBlocks() < this.maxHealth()) {
+                this.bashingDamage++;
+                return;
+            }
+
+            // If there is already bashing damage, upgrade to lethal
+            if (this.bashingDamage > 0) {
+                this.bashingDamage--;
+                this.lethalDamage++;
+                return;
+            }
+
+            // If there is already lethal damage, upgrade to aggravated.
+            if (this.lethalDamage > 0) {
+                this.lethalDamage--;
+                this.aggravatedDamage++;
+                return;
+            }
+
+            // By this stage, they should be dead.
+        };
+
+        this.addLeathalDamage = function() {
+            // Don't bother once they are dead.  You're literally flogging a dead character.
+            if (this.isDead()) return;
+
+            // If there are empty blocks, just use them.
+            if (this.getTotalDamageBlocks() < this.maxHealth()) {
+                this.lethalDamage++;
+                return;
+            }
+
+            // If there is already bashing damage, upgrade to lethal
+            if (this.bashingDamage > 0) {
+                this.bashingDamage--;
+                this.lethalDamage++;
+                return;
+            }
+
+            // If there is already lethal damage, upgrade to aggravated.
+            if (this.lethalDamage > 0) {
+                this.lethalDamage--;
+                this.aggravatedDamage++;
+                return;
+            }
+
+            // By this stage, they should be dead.
+        };
+
+        this.addAggravatedDamage = function() {
+            // Don't bother once they are dead.  You're literally flogging a dead character.
+            if (this.isDead()) return;
+
+            // If there are empty blocks, just use them.
+            if (this.getTotalDamageBlocks() < this.maxHealth()) {
+                this.aggravatedDamage++;
+                return;
+            }
+
+            // If there is already bashing damage, upgrade to aggravated
+            if (this.bashingDamage > 0) {
+                this.bashingDamage--;
+                this.aggravatedDamage++;
+                return;
+            }
+
+            // If there is already lethal damage, upgrade to aggravated.
+            if (this.lethalDamage > 0) {
+                this.lethalDamage--;
+                this.aggravatedDamage++;
+                return;
+            }
+
+            // By this stage, they're dead.
+        };
+
+        this.healDamage = function(type, amount) {
             switch (type) {
                 case 'A':
+                    this.aggravatedDamage = Math.min(this.getTotalDamageBlocks(), Math.max(0, this.aggravatedDamage - amount));
                     break;
                 case 'L':
+                    this.lethalDamage = Math.min(this.getTotalDamageBlocks(), Math.max(0, this.lethalDamage - amount));
                     break;
                 case 'B':
+                    this.bashingDamage = Math.min(this.getTotalDamageBlocks(), Math.max(0, this.bashingDamage - amount));
                     break;
             }
         };
