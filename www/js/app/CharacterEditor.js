@@ -4,7 +4,7 @@ define(
         "app/CharacterGenerator",
         "store"
     ],
-    function(
+    function (
         Character,
         CharacterGenerator,
         store) {
@@ -14,11 +14,14 @@ define(
 
             // fields
             this.loadedCharacter = {};
+            this.loadModalFilter = "";
             this.counter = 10;
 
+
             // methods
-            this.initialize = function() {
+            this.initialize = function () {
                 console.log("Creating CharacterEditor");
+                this.localCharacters = this.getLocalCharacters();
                 if (store.get("character")) {
                     this.loadLocally();
                 } else {
@@ -26,32 +29,57 @@ define(
                 }
             };
 
-            this.loadCharacter = function(character) {
+            this.loadCharacter = function (character) {
                 this.loadedCharacter = new Character(character);
             };
 
-            this.createCharacter = function() {
+            this.createCharacter = function () {
                 console.log("New character");
                 this.loadedCharacter = new Character();
             };
 
-            this.createRandomCharacter = function() {
+            this.createRandomCharacter = function () {
                 this.loadedCharacter = CharacterGenerator.generateRandomCharacter();
             };
 
-            this.saveLocally = function() {
-                store.set("character", this.loadedCharacter);
+            this.getFilteredLocalCharacters = function () {
+                var filter = this.loadModalFilter;
+                if (!filter) {
+                    return this.localCharacters;
+                }
+                return this.localCharacters.filter(savedCharacter => savedCharacter.character.name.indexOf(filter.trim()) !== -1);
             };
 
-            this.loadLocally = function() {
+            this.getLocalCharacters = function () {
+                var characters = store.get("characters");
+                if (!characters) characters = [];
+                return characters;
+            };
+
+            this.saveLocally = function () {
+                if (!this.loadedCharacter) return;
+                this.loadedCharacters = this.getLocalCharacters();
+
+                this.localCharacters.push({ character: this.loadedCharacter, saveTime: Date.now() });
+                store.set("characters", this.localCharacters);
+                this.localCharacters = this.getLocalCharacters();
+            };
+
+            this.loadLocally = function () {
                 this.loadCharacter(store.get("character"));
             };
 
-            this.saveToFile = function() {
+            this.deleteSavedCharacter = function (savedCharacter) {
+                if (!this.localCharacters) return;
+                this.localCharacters = this.localCharacters.filter(saved => saved.saveTime != savedCharacter.saveTime && saved.character.name != savedCharacter.name);
+                store.set("characters", this.localCharacters);
+            };
+
+            this.saveToFile = function () {
                 this.exportJson(this.loadedCharacter);
             };
 
-            this.exportJson = function(character) {
+            this.exportJson = function (character) {
                 var name = prompt("Export as", character.name + '.json');
                 if (!name || name === undefined || name === "") {
                     name = 'character.json';
@@ -71,7 +99,7 @@ define(
             };
 
             /// Expects an event from a file input
-            this.loadFromFile = function(event) {
+            this.loadFromFile = function (event) {
                 if (!window.FileReader) {
                     throw 'browser is not supported';
                 }
@@ -85,7 +113,7 @@ define(
                     reader.readAsText(textFile);
                     // When it's loaded, process it
                     var controller = this;
-                    reader.onload = function(e) {
+                    reader.onload = function (e) {
                         controller.loadCharacter(JSON.parse(reader.result));
                     };
                 } else {
