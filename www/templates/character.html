@@ -20,6 +20,7 @@
                     <personal v-model="character"></personal>
                     <attributes v-model="character"></attributes>
                     <skills v-model="character"></skills>
+                    <specialties v-model="character"></specialties>
                     <merits v-model="character"></merits>
                     <flaws v-model="character"></flaws>
                     <arcana v-model="character"></arcana>
@@ -40,6 +41,9 @@
                     </li>
                     <li class="">
                         <a href="#skills" data-toggle="tab" aria-expanded="false">Skills</a>
+                    </li>
+                    <li class="">
+                        <a href="#specialties" data-toggle="tab" aria-expanded="false">Specialties</a>
                     </li>
                     <li class="">
                         <a href="#merits" data-toggle="tab" aria-expanded="false">Merits</a>
@@ -75,6 +79,9 @@
                     </div>
                     <div class="tab-pane fade" id="skills">
                         <skills v-model="character"></skills>
+                    </div>
+                    <div class="tab-pane fade" id="specialties">
+                        <specialties v-model="character"></specialties>
                     </div>
                     <div class="tab-pane fade" id="merits">
                         <merits v-model="character"></merits>

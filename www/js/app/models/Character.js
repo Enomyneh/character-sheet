@@ -17,6 +17,7 @@ define([
         { "key": "concept", "value": "" },
         { "key": "virtue", "value": "" },
         { "key": "vice", "value": "" },
+        { "key": "notes", "value": "" },
 
         { "key": "size", "value": 5 },
         { "key": "gnosis", "value": 1 },
@@ -30,6 +31,7 @@ define([
         { "key": "flaws", "value": [] },
         { "key": "merits", "value": [] },
         { "key": "derangements", "value": [] },
+        { "key": "specialties", "value": {} },
 
     ];
 
