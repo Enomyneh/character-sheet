@@ -1,30 +1,4 @@
-# Research
-Dice Pool: Intelligence + Academics + equipment
-Action:Extended (3-10+ successes; each roll represents 30 minutes of research)
-Researching information is a fairly straightforward
-task that involves querying libraries and databases. Roll
-Intelligence + Academics + equipment. The number of
-successes required depends on the complexity and/or obscurity of the desired information. A simple set of facts
-might demand three successes to obtain, while a littleknown or difficult-to-find reference might demand 10 or more successes to uncover. Depending on the quality of
-the libraries or databases available, the Storyteller may
-grant a +1 or higher modifier to task rolls.
-Roll Results
-Dramatic Failure:Your character obtains flawed or
-inaccurate information that leads him to draw incorrect
-conclusions about the subject.
-Failure:Your character makes no progress in locating the information he’s after.
-Success:Your character makes progress in his search
-for information.
-Exceptional Success: Your character is well on his
-way to discovering the elusive information he’s after. If
-the roll provides enough successes to push the total well
-above the amount necessary to complete the task (by five
-or more), he gains additional information pertinent to his
-research, providing greater detail and insight into the subject.
-Suggested Equipment: Library card (+1), Internet
-connection (+1), access to a university library (+2), access to government databases (+3)
-Possible Penalties: Unusual topic (-1), obscure topic
-(-2), limited library or database (-2)
+[/] # Research
 
 #Hacking
 Dice Pool: Intelligence + Computer + equipment

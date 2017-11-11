@@ -1,0 +1,15 @@
+{
+    "name": "Hacking",
+    "description": "",
+    "type": "Reflexive/Instant/Extended",
+    "target": "",
+    "dicePoolOptions": [{ "dicePool": ["", "", ""], "qualifier": "", "contested": ["", "", ""] }],
+    "results": {
+        "df": { "description": "" },
+        "f": { "description": "" },
+        "s": { "description": "" },
+        "es": { "description": "" }
+    },
+    "suggestedEquipment": [""],
+    "possiblePenalties": [""]
+}
