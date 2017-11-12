@@ -92,12 +92,15 @@
              }
          };
 
-         this.maxHealth = function() {
-             return this.size + this.stamina;
-         };
-
+         // Willpower
          this.maxWillpower = function() {
              return this.resolve + this.composure;
+         };
+
+         this.adjustWillpower = function(amount) {
+             this.logUpdate("willpower", () =>
+                 this.willpower = Math.min(this.maxMana(), Math.max(this.willpower + amount, 0))
+             );
          };
 
          // Mana
@@ -156,6 +159,10 @@
          };
 
          // Damage and Health
+         this.maxHealth = function() {
+             return this.size + this.stamina;
+         };
+
          this.getTotalDamageBlocks = function() {
              return this.bashingDamage + this.lethalDamage + this.aggravatedDamage;
          };
