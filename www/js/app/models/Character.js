@@ -135,6 +135,11 @@
              return this.dexterity + this.strength + 5;
          };
 
+         // Notes
+         this.updateNotes = function(newValue) {
+             this.logUpdate("notes", () => this.notes = newValue);
+         };
+
          // Logging
          this.log = function(field, oldValue, newValue) {
              if (this.logs.length > 0 && this.logs[this.logs.length - 1].field == field) {
