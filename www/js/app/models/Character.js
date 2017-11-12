@@ -26,6 +26,8 @@ define([
         { "key": "gnosis", "value": 1 },
         { "key": "wisdom", "value": 7 },
         { "key": "experience", "value": 0 },
+        { "key": "cabalExperience", "value": 0 },
+        { "key": "arcaneExperience", "value": 0 },
 
         { "key": "bashingDamage", "value": 0 },
         { "key": "lethalDamage", "value": 0 },
@@ -97,11 +99,19 @@ define([
             return this.resolve + this.composure;
         };
 
+        // Mana
         this.maxMana = function() {
             // TODO work out calculation for this.
             return 10;
         };
 
+        this.adjustMana = function(amount) {
+            this.logUpdate("mana", () =>
+                this.mana = Math.min(this.maxMana(), Math.max(this.mana + amount, 0))
+            );
+        };
+
+        // Defense
         this.defense = function() {
             return Math.min(this.dexterity, this.wits);
         };
@@ -114,14 +124,30 @@ define([
             return this.dexterity + this.strength + 5;
         };
 
-        this.log = function(log) {
-            this.logs.push({
-                "editMode": this.editMode,
-                "log": log,
-                "time": Date.now()
-            });
+        // Logging
+        this.log = function(field, oldValue, newValue) {
+            if (this.logs.length > 0 && this.logs[this.logs.length - 1].field == field) {
+                this.logs[this.logs.length - 1].newValue = newValue;
+                this.logs[this.logs.length - 1].time = Date.now();
+            } else {
+                this.logs.push({
+                    "editMode": this.editMode,
+                    "field": field,
+                    "oldValue": oldValue,
+                    "newValue": newValue,
+                    "time": Date.now()
+                });
+            }
         };
 
+        this.logUpdate = function(fieldName, func) {
+            var before = this[fieldName];
+            func();
+            var after = this[fieldName];
+            this.log(fieldName, before, after);
+        };
+
+        // Damage and Health
         this.getTotalDamageBlocks = function() {
             return this.bashingDamage + this.lethalDamage + this.aggravatedDamage;
         };
@@ -137,24 +163,21 @@ define([
 
             // If there are empty blocks, just use them.
             if (this.getTotalDamageBlocks() < this.maxHealth()) {
-                this.bashingDamage++;
-                this.log("Adding a bashing damage.");
+                this.logUpdate("bashingDamage", () => this.bashingDamage++);
                 return;
             }
 
             // If there is already bashing damage, upgrade to lethal
             if (this.bashingDamage > 0) {
-                this.bashingDamage--;
-                this.lethalDamage++;
-                this.log("Upgrading a bashing damage to lethal.");
+                this.logUpdate("bashingDamage", () => this.bashingDamage--);
+                this.logUpdate("lethalDamage", () => this.lethalDamage++);
                 return;
             }
 
             // If there is already lethal damage, upgrade to aggravated.
             if (this.lethalDamage > 0) {
-                this.lethalDamage--;
-                this.aggravatedDamage++;
-                this.log("Upgrading a bashing damage to aggravated.");
+                this.logUpdate("lethalDamage", () => this.lethalDamage--);
+                this.logUpdate("aggravatedDamage", () => this.aggravatedDamage++);
                 return;
             }
 
@@ -167,24 +190,21 @@ define([
 
             // If there are empty blocks, just use them.
             if (this.getTotalDamageBlocks() < this.maxHealth()) {
-                this.lethalDamage++;
-                this.log("Adding a lethal damage.");
+                this.logUpdate("lethalDamage", () => this.lethalDamage++);
                 return;
             }
 
             // If there is already bashing damage, upgrade to lethal
             if (this.bashingDamage > 0) {
-                this.bashingDamage--;
-                this.lethalDamage++;
-                this.log("Upgrading a bashing damage to lethal.");
+                this.logUpdate("bashingDamage", () => this.bashingDamage--);
+                this.logUpdate("lethalDamage", () => this.lethalDamage++);
                 return;
             }
 
             // If there is already lethal damage, upgrade to aggravated.
             if (this.lethalDamage > 0) {
-                this.lethalDamage--;
-                this.aggravatedDamage++;
-                this.log("Upgrading a lethal damage to aggravated.");
+                this.logUpdate("lethalDamage", () => this.lethalDamage--);
+                this.logUpdate("aggravatedDamage", () => this.aggravatedDamage++);
                 return;
             }
 
@@ -197,24 +217,21 @@ define([
 
             // If there are empty blocks, just use them.
             if (this.getTotalDamageBlocks() < this.maxHealth()) {
-                this.aggravatedDamage++;
-                this.log("Adding an aggravated damage.");
+                this.logUpdate("aggravatedDamage", () => this.aggravatedDamage++);
                 return;
             }
 
             // If there is already bashing damage, upgrade to aggravated
             if (this.bashingDamage > 0) {
-                this.bashingDamage--;
-                this.aggravatedDamage++;
-                this.log("Upgrading a bashing damage to aggravated.");
+                this.logUpdate("bashingDamage", () => this.bashingDamage--);
+                this.logUpdate("aggravatedDamage", () => this.aggravatedDamage++);
                 return;
             }
 
             // If there is already lethal damage, upgrade to aggravated.
             if (this.lethalDamage > 0) {
-                this.lethalDamage--;
-                this.aggravatedDamage++;
-                this.log("Upgrading a lethal damage to aggravated.");
+                this.logUpdate("lethalDamage", () => this.lethalDamage--);
+                this.logUpdate("aggravatedDamage", () => this.aggravatedDamage++);
                 return;
             }
 
@@ -225,16 +242,13 @@ define([
 
             switch (type) {
                 case 'A':
-                    this.log("Healing " + amount + " aggravated damage.");
-                    this.aggravatedDamage = Math.min(this.getTotalDamageBlocks(), Math.max(0, this.aggravatedDamage - amount));
+                    this.logUpdate("aggravatedDamage", () => this.aggravatedDamage = Math.min(this.getTotalDamageBlocks(), Math.max(0, this.aggravatedDamage - amount)));
                     break;
                 case 'L':
-                    this.log("Healing " + amount + " lethal damage.");
-                    this.lethalDamage = Math.min(this.getTotalDamageBlocks(), Math.max(0, this.lethalDamage - amount));
+                    this.logUpdate("lethalDamage", () => this.lethalDamage = Math.min(this.getTotalDamageBlocks(), Math.max(0, this.lethalDamage - amount)));
                     break;
                 case 'B':
-                    this.log("Healing " + amount + " bashing damage.");
-                    this.bashingDamage = Math.min(this.getTotalDamageBlocks(), Math.max(0, this.bashingDamage - amount));
+                    this.logUpdate("bashingDamage", () => this.bashingDamage = Math.min(this.getTotalDamageBlocks(), Math.max(0, this.bashingDamage - amount)));
                     break;
             }
         };
