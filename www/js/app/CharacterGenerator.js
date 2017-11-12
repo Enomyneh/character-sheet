@@ -103,7 +103,8 @@ define([
 
                 if (character[skill.name.toLowerCase()] > chance.integer({ min: 1, max: 5 })) {
                     influences.push(chance.pickone(skill.possessedBy));
-                    character.specialties[skill.name.toLowerCase()] = chance.pickset(skill.specialties, chance.integer({ min: 0, max: 2 }));
+                    if (!character.specialties[skill.name.toLowerCase()]) character.specialties[skill.name.toLowerCase()] = "";
+                    character.specialties[skill.name.toLowerCase()] += chance.pickone(skill.specialties);
                 }
 
             }, this);
