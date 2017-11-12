@@ -112,6 +112,13 @@
              );
          };
 
+         // Gnosis
+         this.adjustGnosis = function(amount) {
+             this.logUpdate("gnosis", () =>
+                 this.gnosis = Math.min(10, Math.max(this.gnosis + amount, 1))
+             );
+         };
+
          // Defense
          this.defense = function() {
              return Math.min(this.dexterity, this.wits);
