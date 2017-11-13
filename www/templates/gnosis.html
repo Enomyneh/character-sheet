@@ -2,11 +2,12 @@
     <gnosis v-model="character"></gnosis>
 -->
 <template id="gnosis">
-    <fieldset>
-        <h4 class="text-center">Gnosis</h4>
-        <div style="float:clear;">
-            <img v-for="n in character.gnosis" src=".\img\dot-filled.png">
-            <img v-for="n in unusedSpace()" src=".\img\dot-empty.png">
+    <fieldset class="text-center">
+        <h4>Gnosis</h4>
+        <div>
+            <img v-for="n in character.gnosis" src=".\img\dot-filled.png"><img v-for="n in unusedSpace()" src=".\img\dot-empty.png">
+        </div>
+        <div>
             <img src=".\img\delete.png" @click="character.adjustGnosis(-1)" />
             <img src=".\img\add.png" @click="character.adjustGnosis(1)" />
         </div>
