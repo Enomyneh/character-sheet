@@ -4,8 +4,9 @@
 
 <template id="personal">
     <fieldset>
-        <h3>Personal</h3>
-        
+        <h4 class="text-center">Personal</h4>
+
+
         <cstext :value.sync="character.name" :label="'Name'"></cstext>
         <cstext :value.sync="character.age" :label="'Age'"></cstext>
         <cstext :value.sync="character.player" :label="'Player'"></cstext>
@@ -16,7 +17,7 @@
         <cstext :value.sync="character.path" :label="'Path'"></cstext>
         <cstext :value.sync="character.order" :label="'Order'"></cstext>
         <cstext :value.sync="character.cabal" :label="'Cabal'"></cstext>
-        
+
         <cstext :value.sync="character.size" :label="'Size'"></cstext>
         <cstext :value="character.defense()" :label="'Defense'"></cstext>
         <cstext :value="character.initiativeMod()" :label="'Initiative Mod'"></cstext>
@@ -38,10 +39,10 @@
         }
     });
     requirejs([
-            'vue'
-        ],
+        'vue'
+    ],
 
-        function(Vue) {
+        function (Vue) {
             console.log("Registering personal template.")
 
             Vue.component('personal', {
@@ -49,7 +50,7 @@
                     prop: 'character'
                 },
                 props: ['character'],
-                data: function() {
+                data: function () {
                     return this.character;
                 },
                 template: '#personal',

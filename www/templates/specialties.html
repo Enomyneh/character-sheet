@@ -4,10 +4,10 @@
 
 <template id="specialties">
     <fieldset>
-        <h3>Specialties</h3>
-            <div v-for="skill in getSkills()" key="skill.name" >
-                <cstext :value.sync="character.specialties[skill.name.toLowerCase()]" :label="skill.name"></cstext>
-            </div>
+        <h4 class="text-center">Specialties</h4>
+        <div v-for="skill in getSkills()" key="skill.name">
+            <cstext :value.sync="character.specialties[skill.name.toLowerCase()]" :label="skill.name"></cstext>
+        </div>
     </fieldset>
 </template>
 
@@ -21,11 +21,11 @@
         }
     });
     requirejs([
-            'vue',
-            'json!data/skills.json'
-        ],
+        'vue',
+        'json!data/skills.json'
+    ],
 
-        function(Vue, skills) {
+        function (Vue, skills) {
             console.log("Registering specialties template.")
 
             Vue.component('specialties', {
@@ -33,13 +33,13 @@
                     prop: 'character'
                 },
                 props: ['character'],
-                data: function() {
+                data: function () {
                     return this.character;
                 },
                 template: '#specialties',
                 components: {},
                 methods: {
-                    getSkills: function() {
+                    getSkills: function () {
                         return skills;
                     }
                 }
