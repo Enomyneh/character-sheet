@@ -5,8 +5,27 @@
 <template id="specialties">
     <fieldset>
         <h4 class="text-center">Specialties</h4>
-        <div v-for="skill in getSkills()" key="skill.name">
-            <cstext :value.sync="character.specialties[skill.name.toLowerCase()]" :label="skill.name"></cstext>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h5 class="text-center text-muted ">Mental</h5>
+            <div v-for="skill in getSkillsByCategory('Mental')" key="skill.name" class="form-group">
+                <cstext :value.sync="character.specialties[skill.name.toLowerCase()]" :label="skill.name"></cstext>
+                <!--                     
+                <label class="col-xs-6 control-label text-right">{{skill.name}}</label>
+                <input class="col-xs-6" type="text" class="form-control" :title="skill.name" :value="character.specialties[skill.name.toLowerCase()]"
+                    @input="updateSpecialty"> -->
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h5 class="text-center text-muted ">Physical</h5>
+            <div v-for="skill in getSkillsByCategory('Physical')" key="skill.name">
+                <cstext :value.sync="character.specialties[skill.name.toLowerCase()]" :label="skill.name"></cstext>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h5 class="text-center text-muted ">Social</h5>
+            <div v-for="skill in getSkillsByCategory('Social')" key="skill.name">
+                <cstext :value.sync="character.specialties[skill.name.toLowerCase()]" :label="skill.name"></cstext>
+            </div>
         </div>
     </fieldset>
 </template>
@@ -41,6 +60,16 @@
                 methods: {
                     getSkills: function () {
                         return skills;
+                    },
+                    getSkillsByCategory: function (category) {
+                        // console.log(this.character);
+                        return skills.filter(skill => skill.category == category);
+                    },
+                    updateSpecialty: function (inputEvent) {
+                        console.log(inputEvent);
+                        var value = inputEvent.target.value;
+                        var skill = inputEvent.target.title;
+                        this.character.updateSkillSpecialty(skill, value);
                     }
                 }
             });
