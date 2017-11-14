@@ -1,0 +1,50 @@
+<!-- Usage:
+    <activespells v-model="character"></activespells>
+-->
+<template id="activespells">
+    <fieldset class="text-center">
+        <h4>Active Spells</h4>
+        <div>
+            Maximum of
+            <strong>{{character.maxActiveSpells()}}</strong> active spells.
+        </div>
+        <div>
+            Spell tolerance
+            <strong>{{character.spellTolerance()}}</strong>.
+        </div>
+    </fieldset>
+</template>
+<script type="text/javascript">
+    requirejs.config({
+        baseUrl: 'js/lib',
+        paths: {
+            app: '../app',
+            models: '../app/models',
+            data: '../../data',
+        }
+    });
+    requirejs([
+        'vue'
+    ],
+
+        function (Vue) {
+            console.log("Registering activespells template.")
+
+            Vue.component('activespells', {
+                model: {
+                    prop: 'character'
+                },
+                props: ['character'],
+                data: function () {
+                    return this.character;
+                },
+                template: '#activespells',
+                components: {},
+                methods: {
+                    unusedSpace: function () {
+                        return this.character.maxActive Spells() - this.character.activespells;
+                    }
+                }
+            });
+        });
+</script>

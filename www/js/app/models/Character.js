@@ -140,6 +140,10 @@ define([
                 return this.getGnosisData(this.gnosis).physicalLimit;
             };
 
+            this.spellTolerance = function () {
+                return this.stamina;
+            };
+
             this.spellAccumulationPenalty = function () {
                 // TODO define
                 return 0;
