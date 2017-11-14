@@ -12,6 +12,15 @@
             Spell tolerance
             <strong>{{character.spellTolerance()}}</strong>.
         </div>
+        <div class="col-xs-12" v-for="(spell, index) in character.activeSpells">
+            <div class="input-group">
+                <input type="text" class="form-control" v-model="spell.name" @input="updateSpell(index, spell)">
+                <div class="input-group-addon btn-danger" @click="removeSpell(index)">❌</div>
+            </div>
+        </div>
+        <div class="col-xs-2 pull-right">
+            <button class="btn btn-info col-xs-6 pull-right" @click="addSpell()" :disabled="maxSpells()">Add</button>
+        </div>
     </fieldset>
 </template>
 <script type="text/javascript">
@@ -24,10 +33,10 @@
         }
     });
     requirejs([
-        'vue'
-    ],
+            'vue'
+        ],
 
-        function (Vue) {
+        function(Vue) {
             console.log("Registering activespells template.")
 
             Vue.component('activespells', {
@@ -35,15 +44,27 @@
                     prop: 'character'
                 },
                 props: ['character'],
-                data: function () {
+                data: function() {
                     return this.character;
                 },
                 template: '#activespells',
                 components: {},
                 methods: {
-                    unusedSpace: function () {
-                        return this.character.maxActive Spells() - this.character.activespells;
+                    addSpell: function() {
+                        this.character.activeSpells.push({
+                            name: ""
+                        });
+                    },
+                    removeSpell: function(index) {
+                        this.character.activeSpells.splice(index, 1);
+                    },
+                    updateSpell: function(index, spell) {
+                        this.character.activeSpells[index] = spell;
+                    },
+                    maxSpells: function() {
+                        return this.character.activeSpells.length >= this.character.maxActiveSpells();
                     }
+
                 }
             });
         });
