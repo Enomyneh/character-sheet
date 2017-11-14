@@ -108,8 +108,11 @@ define([
 
             // Mana
             this.maxMana = function () {
-                // TODO work out calculation for this.
-                return 10;
+                return this.getGnosisData(this.gnosis).maxMana;
+            };
+
+            this.maxManaPerTurn = function () {
+                return this.getGnosisData(this.gnosis).maxManaPerTurn;
             };
 
             this.adjustMana = function (amount) {
