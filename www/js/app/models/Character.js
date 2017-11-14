@@ -99,7 +99,8 @@ define([
 
             // Strength
             this.carryingCapacity = function () {
-                return "100kg?";
+
+                return this.strength * 25 + "lbs (" + this.strength * 11.4 + "kg)";
             };
 
             // Willpower
