@@ -14,11 +14,11 @@
         </div>
         <div class="col-xs-12" v-for="(spell, index) in character.activeSpells">
             <div class="input-group">
-                <input type="text" class="form-control" v-model="spell.name" @input="updateSpell(index, spell)">
+                <input type="text" class="form-control spellName" data-provide="typeahead" v-model="spell.name" @input="updateSpell(index, spell)" @update="updateSpell(index, spell)">
                 <div class="input-group-addon btn-danger" @click="removeSpell(index)">❌</div>
             </div>
         </div>
-        <div class="col-xs-2 pull-right">
+        <div class="col-xs-12 pull-right">
             <button class="btn btn-info col-xs-6 pull-right" @click="addSpell()" :disabled="maxSpells()">Add</button>
         </div>
     </fieldset>
@@ -33,10 +33,11 @@
         }
     });
     requirejs([
-            'vue'
+            'jquery', 'vue',
+            'bootstrap3-typeahead'
         ],
 
-        function(Vue) {
+        function($, Vue, typeahead) {
             console.log("Registering activespells template.")
 
             Vue.component('activespells', {
@@ -54,6 +55,7 @@
                         this.character.activeSpells.push({
                             name: ""
                         });
+                        this.applyTypeAhead();
                     },
                     removeSpell: function(index) {
                         this.character.activeSpells.splice(index, 1);
@@ -63,8 +65,22 @@
                     },
                     maxSpells: function() {
                         return this.character.activeSpells.length >= this.character.maxActiveSpells();
-                    }
+                    },
+                    applyTypeAhead: function() {
+                        $.get("data/spells.json", function(data) {
+                            var spellNames = data.map(function(spell) {
+                                return spell.name
+                            });
 
+                            $(".spellName").filter(element => !element.dataset).typeahead({
+                                source: spellNames,
+                            });
+                        }, 'json');
+                    }
+                },
+                mounted: function() {
+                    console.log("activespells template mounted");
+                    this.applyTypeAhead();
                 }
             });
         });
