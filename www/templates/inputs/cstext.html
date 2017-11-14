@@ -4,9 +4,9 @@
 
 <template id="cstext">
     <div>
-        <label :for="label" class="col-sm-2 col-md-1 control-label">
+        <label :for="label" class="col-xs-6 control-label">
             {{label}}</label>
-        <div class="col-sm-4 col-md-3">
+        <div class="col-xs-6">
             <input type="text" class="form-control" :id="label" :value="value" @input="updateValue">
         </div>
     </div>
@@ -22,10 +22,10 @@
         }
     });
     requirejs([
-            'vue'
-        ],
+        'vue'
+    ],
 
-        function(Vue) {
+        function (Vue) {
             console.log("Registering cstext template.")
 
             Vue.component('cstext', {
@@ -41,7 +41,7 @@
                         required: true
                     }
                 },
-                data: function() {
+                data: function () {
                     return {
                         text: this.value
                     };
@@ -49,7 +49,7 @@
                 template: '#cstext',
                 components: {},
                 methods: {
-                    updateValue: function(event) {
+                    updateValue: function (event) {
                         console.log("Updating: " + event.currentTarget.value);
                         this.$emit('update:value', event.currentTarget.value);
                     }

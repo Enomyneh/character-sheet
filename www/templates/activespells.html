@@ -1,19 +1,16 @@
 <!-- Usage:
-    <mana v-model="character"></mana>
+    <activespells v-model="character"></activespells>
 -->
-<template id="mana">
+<template id="activespells">
     <fieldset class="text-center">
-        <h4>Mana</h4>
+        <h4>Active Spells</h4>
         <div>
-            <img v-for="n in character.mana" src=".\img\box-stroke.png">
-            <img v-for="n in unusedSpace()" src=".\img\box-empty-grey.png">
+            Maximum of
+            <strong>{{character.maxActiveSpells()}}</strong> active spells.
         </div>
         <div>
-            <img src=".\img\delete.png" @click="character.adjustMana(-1)" />
-            <img src=".\img\add.png" @click="character.adjustMana(1)" />
-        </div>
-        <div>
-            <strong>{{character.maxManaPerTurn()}}</strong> mana per turn.
+            Spell tolerance
+            <strong>{{character.spellTolerance()}}</strong>.
         </div>
     </fieldset>
 </template>
@@ -31,9 +28,9 @@
     ],
 
         function (Vue) {
-            console.log("Registering mana template.")
+            console.log("Registering activespells template.")
 
-            Vue.component('mana', {
+            Vue.component('activespells', {
                 model: {
                     prop: 'character'
                 },
@@ -41,11 +38,11 @@
                 data: function () {
                     return this.character;
                 },
-                template: '#mana',
+                template: '#activespells',
                 components: {},
                 methods: {
                     unusedSpace: function () {
-                        return this.character.maxMana() - this.character.mana;
+                        return this.character.maxActive Spells() - this.character.activespells;
                     }
                 }
             });
