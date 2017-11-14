@@ -6,7 +6,7 @@
     <fieldset>
         <h4 class="text-center">Arcana</h4>
         <div v-for="arcanum in getArcana()" key="arcanum.name">
-            <label class="col-xs-6 col-sm-3 col-md-2 control-label">{{arcanum.name}}</label>
+            <label class="col-xs-6 col-sm-3 col-md-2 control-label text-right">{{arcanum.name}}</label>
             <csdots class="col-xs-6 col-sm-3 col-md-2" :value.sync="character[arcanum.name.toLowerCase()]" :min="0" :max="5"></csdots>
         </div>
     </fieldset>
@@ -22,11 +22,11 @@
         }
     });
     requirejs([
-        'vue',
-        'json!data/arcana.json'
-    ],
+            'vue',
+            'json!data/arcana.json'
+        ],
 
-        function (Vue, arcana) {
+        function(Vue, arcana) {
             console.log("Registering arcana template.")
 
             Vue.component('arcana', {
@@ -34,13 +34,13 @@
                     prop: 'character'
                 },
                 props: ['character'],
-                data: function () {
+                data: function() {
                     return this.character;
                 },
                 template: '#arcana',
                 components: {},
                 methods: {
-                    getArcana: function () {
+                    getArcana: function() {
                         return arcana;
                     }
                 }
