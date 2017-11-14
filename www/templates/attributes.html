@@ -9,21 +9,21 @@
             <h5 class="text-center text-muted ">Mental</h5>
             <div v-for="attribute in getAttributesByCategory( 'Mental') " key="attribute.name ">
                 <label class="col-xs-6 control-label text-right">{{attribute.name}}</label>
-                <csdots class="col-xs-6 " :value.sync="character[attribute.name.toLowerCase()] " :min="1 " :max="5 "></csdots>
+                <csdots class="col-xs-6 " :value.sync="character[attribute.name.toLowerCase()] " :min="1 " :max="character.physicalLimit()"></csdots>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 ">
             <h5 class="text-center text-muted ">Physical</h5>
             <div v-for="attribute in getAttributesByCategory( 'Physical') " key="attribute.name ">
                 <label class="col-xs-6 control-label text-right">{{attribute.name}}</label>
-                <csdots class="col-xs-6 " :value.sync="character[attribute.name.toLowerCase()] " :min="1 " :max="5 "></csdots>
+                <csdots class="col-xs-6 " :value.sync="character[attribute.name.toLowerCase()] " :min="1 " :max="character.physicalLimit()"></csdots>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 ">
             <h5 class="text-center text-muted ">Social</h5>
             <div v-for="attribute in getAttributesByCategory( 'Social') " key="attribute.name ">
                 <label class="col-xs-6 control-label text-right">{{attribute.name}}</label>
-                <csdots class="col-xs-6 " :value.sync="character[attribute.name.toLowerCase()] " :min="1 " :max="5 "></csdots>
+                <csdots class="col-xs-6 " :value.sync="character[attribute.name.toLowerCase()] " :min="1 " :max="character.physicalLimit()"></csdots>
             </div>
         </div>
     </fieldset>

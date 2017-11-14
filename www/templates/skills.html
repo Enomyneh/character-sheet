@@ -9,21 +9,21 @@
             <h5 class="text-center text-muted ">Mental</h5>
             <div v-for="skill in getSkillsByCategory('Mental')" key="skill.name">
                 <label class="col-xs-6 control-label text-right">{{skill.name}}</label>
-                <csdots class="col-xs-6" :value.sync="character[skill.name.toLowerCase()]" :min="0" :max="5"></csdots>
+                <csdots class="col-xs-6" :value.sync="character[skill.name.toLowerCase()]" :min="0" :max="character.physicalLimit()"></csdots>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4">
             <h5 class="text-center text-muted ">Physical</h5>
             <div v-for="skill in getSkillsByCategory('Physical')" key="skill.name">
                 <label class="col-xs-6 control-label text-right">{{skill.name}}</label>
-                <csdots class="col-xs-6" :value.sync="character[skill.name.toLowerCase()]" :min="0" :max="5"></csdots>
+                <csdots class="col-xs-6" :value.sync="character[skill.name.toLowerCase()]" :min="0" :max="character.physicalLimit()"></csdots>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4">
             <h5 class="text-center text-muted ">Social</h5>
             <div v-for="skill in getSkillsByCategory('Social')" key="skill.name">
                 <label class="col-xs-6 control-label text-right">{{skill.name}}</label>
-                <csdots class="col-xs-6" :value.sync="character[skill.name.toLowerCase()]" :min="0" :max="5"></csdots>
+                <csdots class="col-xs-6" :value.sync="character[skill.name.toLowerCase()]" :min="0" :max="character.physicalLimit()"></csdots>
             </div>
         </div>
     </fieldset>

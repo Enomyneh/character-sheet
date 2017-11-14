@@ -2,11 +2,13 @@
 define([
     'json!data/attributes.json',
     'json!data/skills.json',
-    'json!data/arcana.json'
+    'json!data/arcana.json',
+    'json!data/gnosis.json'
 ], function (
     attributes,
     skills,
-    arcana) {
+    arcana,
+    gnosis) {
 
         console.log("Initialising Character definition");
 
@@ -55,6 +57,7 @@ define([
         arcana.forEach(function (arcanum) {
             defaults.push({ "key": arcanum.name.toLowerCase(), "value": 0 });
         }, this);
+
 
         // This is specificallly a Mage the Awakening Character
         function Character(character) {
@@ -120,6 +123,23 @@ define([
                 this.logUpdate("gnosis", () =>
                     this.gnosis = Math.min(10, Math.max(this.gnosis + amount, 1))
                 );
+            };
+
+            this.maxActiveSpells = function () {
+                return this.gnosis + 3;
+            };
+
+            this.getGnosisData = function (gnosisLevel) {
+                return gnosis.filter(g => g.level == gnosisLevel)[0];
+            };
+
+            this.physicalLimit = function () {
+                return this.getGnosisData(this.gnosis).physicalLimit;
+            };
+
+            this.spellAccumulationPenalty = function () {
+                // TODO define
+                return 0;
             };
 
             // Defense
