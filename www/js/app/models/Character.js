@@ -140,6 +140,14 @@ define([
                 return this.gnosis + 3;
             };
 
+            this.currentActiveSpells = function () {
+                return this.activeSpells.filter(spell => spell.castByMe).length;
+            };
+
+            this.spellsCastOnCharacter = function () {
+                return this.activeSpells.filter(spell => spell.castOnMe).length;
+            };
+
             this.getGnosisData = function (gnosisLevel) {
                 return gnosis.filter(g => g.level == gnosisLevel)[0];
             };
@@ -153,8 +161,7 @@ define([
             };
 
             this.spellAccumulationPenalty = function () {
-                // TODO define
-                return 0;
+                return Math.min(0, this.spellTolerance() - this.spellsCastOnCharacter());
             };
 
             // Defense

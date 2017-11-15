@@ -5,17 +5,24 @@
     <fieldset class="text-center">
         <h4>Active Spells</h4>
         <div>
-            Maximum of
+            <strong>{{character.currentActiveSpells()}}</strong> of
             <strong>{{character.maxActiveSpells()}}</strong> active spells.
         </div>
         <div>
-            Spell tolerance
+            Spell tolerance:
+            <strong>{{character.spellsCastOnCharacter()}}</strong> of
             <strong>{{character.spellTolerance()}}</strong>.
+            <br/> Casting penalty: {{character.spellAccumulationPenalty()}}.
         </div>
         <div class="col-xs-12" v-for="(spell, index) in character.activeSpells">
             <div class="input-group">
                 <input type="text" class="form-control spellName" data-provide="typeahead" v-model="spell.name" @input="updateSpell(index, spell)"
                     @update="updateSpell(index, spell)">
+                <span class="input-group-addon">
+                    On
+                    <input type="checkbox" v-model="spell.castOnMe" /> By
+                    <input type="checkbox" v-model="spell.castByMe" />
+                </span>
                 <div class="input-group-addon btn-danger" @click="removeSpell(index)">❌</div>
             </div>
         </div>
