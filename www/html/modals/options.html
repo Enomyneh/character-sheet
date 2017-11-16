@@ -9,7 +9,9 @@
                 <h4>Options</h4>
             </div>
             <div class="modal-body">
-                There are no options.
+                <input type="checkbox" v-model="options.autoSave" @change="saveOptions(options)" /> Autosave on edit (Doesn't completely work)
+                <input type="checkbox" v-model="options.defaultToTabView" @change="saveOptions(options)" /> Default To Tab View
+
                 <!-- <div>Default view:
                     <div>Full view</div>
                     <div>Tabbed</div>
