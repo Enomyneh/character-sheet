@@ -28,4 +28,19 @@
 }, {
     "stamina": 10,
     "time": "4 hours"
+}, {
+    "stamina": 11,
+    "time": "8 hours"
+}, {
+    "stamina": 12,
+    "time": "16 hours"
+}, {
+    "stamina": 13,
+    "time": "32 hours"
+}, {
+    "stamina": 14,
+    "time": "3 days"
+}, {
+    "stamina": 15,
+    "time": "6 days"
 }]
